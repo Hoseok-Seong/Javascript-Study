@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>의자</h1>
+    <div>탁자</div>
+    <h3>책상</h3>
+
+    <button id="btnSeat">의자죽이기</button>
+    <button id="btnSeat2">의자살리기</button>
+    <script>
+        let e1 = document.querySelector("#btnSeat");
+        console.log(e1);
+
+        //함수(행위)를 두 번째 인수에 넣을 수 있다. click되면 실행되므로 익명함수 가능
+        e1.addEventListener("click", function () {
+            alert("클릭됨");
+            let e2 = document.querySelector("h1");
+            e2.remove();
+        });
+
+        let e3 = document.querySelector("#btnSeat2");
+        console.log(e3);
+
+        //함수(행위)를 두 번째 인수에 넣을 수 있다. click되면 실행되므로 익명함수 가능
+        e3.addEventListener("click", function () {
+            alert("클릭됨");
+            location.reload();
+        }); 
+    </script>
+</body>
+
+</html>

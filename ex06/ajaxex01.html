@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>ajax get 요청</h1>
+    <hr>
+    <div id="postBox">
+        
+    </div>
+    <button onclick="getPost()">통신요청</button>
+    <script>
+        function getPost() {
+            $.ajax({
+                type:"get",
+                url: "http://localhost:8080/init/post",
+                dataType:"json" //메타데이터 같은 것. json으로 받은 데이터를 자바스크립트 Object로 파싱해줘.
+            })
+            .done(function(res){
+                console.log(res);
+                if (res.code == 1) {
+                    //alert("통신 성공");
+                    render(res.data); //list 타입
+                } else {
+                    alert("통신실패");
+                }
+            }) //콜백해준다
+            .fail(function(err){ 
+                console.log(err);
+                alert("통신실패");
+            }); //http상태코드 400, 500 에러일 경우
+        }
+
+        function render(posts) {
+            posts.forEach((post)=>{
+                let el = `
+                <div id="post${post.id}">${post.id} ${post.title} ${post.content}</div>
+                <button onclick="deleteById(${post.id})">삭제</button>
+                `; //백틱을 쓰면 좋다.
+                $("#postBox").prepend(el); 
+            });
+        }
+
+        function deleteById(id) {
+            $(`#post${id}`).remove();
+        }
+    </script>
+</body>
+</html>
